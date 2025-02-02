@@ -9,7 +9,7 @@ router = Router()
 
 @router.message(Command("start"))
 async def start(message: Message):
-    return await message.reply("Hello!")
+    return await message.reply("Hello world!")
 
 
 @router.message(Command("help"))
