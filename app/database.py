@@ -7,21 +7,14 @@ class PostgresDB:
         self.config = config
         self.pool: Optional[asyncpg.Pool] = None
 
-    async def connect(self) -> None:
-        if not self.pool:
-            self.pool = await asyncpg.create_pool(**self.config)
-            await self.create_tables()
-
-    async def close(self) -> None:
-        if self.pool:
-            await self.pool.close()
-
     async def __aenter__(self):
-        await self.connect()
+        self.pool = await asyncpg.create_pool(**self.config)
+        await self.create_tables()
+
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        await self.close()
+        await self.pool.close()
 
     async def create_tables(self) -> None:
         await self.do(
@@ -36,7 +29,6 @@ class PostgresDB:
         )
 
     async def do(self, sql: str, values=None, transaction=False) -> None:
-        await self.connect()
         async with self.pool.acquire() as conn:
             if transaction:
                 async with conn.transaction():
@@ -51,7 +43,6 @@ class PostgresDB:
                     await conn.execute(sql)
 
     async def read(self, sql: str, values=None, one=False):
-        await self.connect()
         async with self.pool.acquire() as conn:
             rows = await conn.fetch(sql, *values) if values else await conn.fetch(sql)
             if one:
@@ -62,10 +53,9 @@ class PostgresDB:
         sql = "INSERT INTO users (id, username, full_name) VALUES ($1, $2, $3)"
         await self.do(sql, (user_id, username, full_name))
 
-    async def user_exists(self, user_id: int) -> bool:
-        sql = "SELECT * FROM users WHERE id=$1"
-        return bool(await self.read(sql, (user_id,), one=True))
-
     async def get_user(self, user_id: int) -> Optional[dict]:
         sql = "SELECT * FROM users WHERE id=$1"
         return await self.read(sql, (user_id,), one=True)
+
+    async def user_exists(self, user_id: int) -> bool:
+        return bool(await self.get_user(user_id))
