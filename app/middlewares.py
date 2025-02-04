@@ -50,9 +50,7 @@ class ChatExistenceCheckMiddleware(DatabaseRelatedMiddleware):
                 await self.db.set_active_chat(event.from_user.id, last_chat["id"])
             else:
                 logging.info(f"New chat for user: {event.from_user.username}")
-                created_chat = await self.db.create_chat(
-                    event.from_user.id, event.chat.title
-                )
+                created_chat = await self.db.create_chat(event.from_user.id, "New chat")
                 await self.db.set_active_chat(event.from_user.id, created_chat["id"])
 
         return await handler(event, data)

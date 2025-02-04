@@ -44,13 +44,28 @@ class PostgresDB:
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
 
-            ALTER TABLE chats 
-            ADD CONSTRAINT fk_user_id
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+            DO $$ 
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1 
+                    FROM pg_constraint 
+                    WHERE conname = 'fk_user_id'
+                ) THEN
+                    ALTER TABLE chats 
+                    ADD CONSTRAINT fk_user_id
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+                END IF;
 
-            ALTER TABLE users 
-            ADD CONSTRAINT fk_active_chat_id
-            FOREIGN KEY (active_chat_id) REFERENCES chats(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED;
+                IF NOT EXISTS (
+                    SELECT 1 
+                    FROM pg_constraint 
+                    WHERE conname = 'fk_active_chat_id'
+                ) THEN
+                    ALTER TABLE users 
+                    ADD CONSTRAINT fk_active_chat_id
+                    FOREIGN KEY (active_chat_id) REFERENCES chats(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED;
+                END IF;
+            END $$;
 
             COMMIT;
             """
@@ -105,6 +120,24 @@ class PostgresDB:
         """
         return await self.read(sql, (user_id, name), one=True)
 
+    async def set_chat_name(self, chat_id: int, name: str) -> None:
+        sql = """
+            UPDATE chats 
+            SET name=$1 
+            WHERE id=$2
+            RETURNING id, user_id, name, created_at
+        """
+        await self.do(sql, (name, chat_id), one=True)
+
+    async def set_active_chat(self, user_id: int, chat_id: int) -> dict:
+        sql = """
+            UPDATE users 
+            SET active_chat_id=$1 
+            WHERE id=$2
+            RETURNING id, username, full_name, active_chat_id, created_at
+        """
+        return await self.read(sql, (chat_id, user_id), one=True)
+
     async def get_chat(self, chat_id: int) -> Optional[dict]:
         sql = """
             SELECT * 
@@ -132,15 +165,6 @@ class PostgresDB:
         """
         result = await self.read(sql, (user_id,), one=True)
         return bool(result)
-
-    async def set_active_chat(self, user_id: int, chat_id: int) -> dict:
-        sql = """
-            UPDATE users 
-            SET active_chat_id=$1 
-            WHERE id=$2
-            RETURNING id, username, full_name, active_chat_id, created_at
-        """
-        return await self.read(sql, (chat_id, user_id), one=True)
 
     async def get_active_chat(self, user_id: int) -> Optional[dict]:
         sql = """
