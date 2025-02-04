@@ -39,8 +39,7 @@ class PostgresDB:
             CREATE TABLE IF NOT EXISTS messages (
                 id SERIAL PRIMARY KEY,
                 chat_id INTEGER REFERENCES chats(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
-                role VARCHAR(50) NOT NULL,
-                content TEXT NOT NULL,
+                content JSONB NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
 

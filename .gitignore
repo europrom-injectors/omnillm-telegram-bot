@@ -3,3 +3,4 @@ ngrok.exe
 test
 test.py
 __pycache__
+venv
