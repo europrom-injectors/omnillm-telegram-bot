@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher
 from config import TELEGRAM_BOT_TOKEN, sql
 from logger import setup_logging
 from router import router
-from middlewares import UserExistenceCheckMiddleware
+from middlewares import UserExistenceCheckMiddleware, ChatExistenceCheckMiddleware
 
 setup_logging()
 
@@ -14,6 +14,7 @@ dp = Dispatcher()
 
 # Setup dp
 dp.message.middleware(UserExistenceCheckMiddleware(sql))
+dp.message.middleware(ChatExistenceCheckMiddleware(sql))
 dp.include_router(router)
 
 
