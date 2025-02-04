@@ -16,39 +16,38 @@ class PostgresDB:
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         await self.pool.close()
 
+    async def create_tables(self) -> None:
+        await self.do(
+            """
+            BEGIN;
 
-async def create_tables(self) -> None:
-    await self.do(
-        """
-        BEGIN;
+            CREATE TABLE IF NOT EXISTS users (
+                id BIGINT PRIMARY KEY,
+                active_chat_id INTEGER REFERENCES chats(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED,
+                username VARCHAR(255),
+                full_name VARCHAR(255),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
 
-        CREATE TABLE IF NOT EXISTS users (
-            id BIGINT PRIMARY KEY,
-            active_chat_id INTEGER REFERENCES chats(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED,
-            username VARCHAR(255),
-            full_name VARCHAR(255),
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
+            CREATE TABLE IF NOT EXISTS chats (
+                id SERIAL PRIMARY KEY,
+                user_id BIGINT REFERENCES users(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
+                name VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
 
-        CREATE TABLE IF NOT EXISTS chats (
-            id SERIAL PRIMARY KEY,
-            user_id BIGINT REFERENCES users(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
-            name VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
+            CREATE TABLE IF NOT EXISTS messages (
+                id SERIAL PRIMARY KEY,
+                chat_id INTEGER REFERENCES chats(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
+                role VARCHAR(50) NOT NULL,
+                content TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
 
-        CREATE TABLE IF NOT EXISTS messages (
-            id SERIAL PRIMARY KEY,
-            chat_id INTEGER REFERENCES chats(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
-            role VARCHAR(50) NOT NULL,
-            content TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-
-        COMMIT;
-        """,
-        transaction=True,
-    )
+            COMMIT;
+            """,
+            transaction=True,
+        )
 
     async def read(self, sql: str, values=None, one=False):
         async with self.pool.acquire() as conn:
