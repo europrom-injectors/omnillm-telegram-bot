@@ -49,6 +49,20 @@ class PostgresDB:
             transaction=True,
         )
 
+    async def do(self, sql: str, values=None, transaction=False) -> None:
+        async with self.pool.acquire() as conn:
+            if transaction:
+                async with conn.transaction():
+                    if values:
+                        await conn.execute(sql, *values)
+                    else:
+                        await conn.execute(sql)
+            else:
+                if values:
+                    await conn.execute(sql, *values)
+                else:
+                    await conn.execute(sql)
+
     async def read(self, sql: str, values=None, one=False):
         async with self.pool.acquire() as conn:
             rows = await conn.fetch(sql, *values) if values else await conn.fetch(sql)
@@ -148,4 +162,3 @@ class PostgresDB:
             WHERE u.id=$1 
             ORDER BY m.created_at ASC
         """
-        return await self.read(sql, (user_id,))
