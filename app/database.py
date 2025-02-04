@@ -93,7 +93,7 @@ class PostgresDB:
         return bool(await self.get_user(user_id))
 
     # Chat methods
-    async def wwwcreate_chat(self, user_id: int, name: str) -> dict:
+    async def create_chat(self, user_id: int, name: str) -> dict:
         sql = """
             INSERT INTO chats (user_id, name) 
             VALUES ($1, $2) 
