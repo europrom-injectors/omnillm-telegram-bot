@@ -21,18 +21,18 @@ class PostgresDB:
             """
             BEGIN;
 
-            CREATE TABLE IF NOT EXISTS users (
-                id BIGINT PRIMARY KEY,
-                active_chat_id INTEGER REFERENCES chats(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED,
-                username VARCHAR(255),
-                full_name VARCHAR(255),
+            CREATE TABLE IF NOT EXISTS chats (
+                id SERIAL PRIMARY KEY,
+                user_id BIGINT,
+                name VARCHAR(255) NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
 
-            CREATE TABLE IF NOT EXISTS chats (
-                id SERIAL PRIMARY KEY,
-                user_id BIGINT REFERENCES users(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
-                name VARCHAR(255) NOT NULL,
+            CREATE TABLE IF NOT EXISTS users (
+                id BIGINT PRIMARY KEY,
+                active_chat_id INTEGER,
+                username VARCHAR(255),
+                full_name VARCHAR(255),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
 
@@ -44,9 +44,14 @@ class PostgresDB:
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
 
-            COMMIT;
-            """,
-            transaction=True,
+            ALTER TABLE chats 
+            ADD CONSTRAINT fk_user_id
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+
+            ALTER TABLE users 
+            ADD CONSTRAINT fk_active_chat_id
+            FOREIGN KEY (active_chat_id) REFERENCES chats(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEF
+            """
         )
 
     async def do(self, sql: str, values=None, transaction=False) -> None:
