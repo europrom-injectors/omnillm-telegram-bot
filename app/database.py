@@ -169,3 +169,4 @@ class PostgresDB:
             WHERE u.id=$1 
             ORDER BY m.created_at ASC
         """
+        return await self.read(sql, (user_id,))
