@@ -50,7 +50,9 @@ class PostgresDB:
 
             ALTER TABLE users 
             ADD CONSTRAINT fk_active_chat_id
-            FOREIGN KEY (active_chat_id) REFERENCES chats(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEF
+            FOREIGN KEY (active_chat_id) REFERENCES chats(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED;
+
+            COMMIT;
             """
         )
 
