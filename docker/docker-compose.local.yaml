@@ -1,11 +1,11 @@
-name: ${APP_NAME:-PWD##*/}
+name: ${APP_NAME}
 
 services:
     app:
         build:
             context: ..
             dockerfile: docker/Dockerfile.prod
-        container_name: ${APP_NAME:-PWD##*/}-app
+        container_name: ${APP_NAME}-app
         env_file: ../.env
         environment:
             - POSTGRES_HOST=${POSTGRES_HOST:-db}
@@ -21,7 +21,7 @@ services:
 
     db:
         image: postgres:16
-        container_name: ${APP_NAME:-PWD##*/}-postgres-db
+        container_name: ${APP_NAME}-postgres-db
         env_file: ../.env
         environment:
             - DB_USER=${POSTGRES_USER}
@@ -50,6 +50,6 @@ services:
 
 volumes:
     files:
-        name: ${APP_NAME:-PWD##*/}-files
+        name: ${APP_NAME}-files
     postgres-data:
-        name: ${APP_NAME:-PWD##*/}-postgres-data
+        name: ${APP_NAME}-postgres-data
