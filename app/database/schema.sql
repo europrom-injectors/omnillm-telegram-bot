@@ -5,21 +5,21 @@ BEGIN;
         active_chat_id INTEGER,
         username VARCHAR(255),
         full_name VARCHAR(255),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
     CREATE TABLE IF NOT EXISTS chats (
         id SERIAL PRIMARY KEY,
         user_id BIGINT,
         name VARCHAR(255) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
     CREATE TABLE IF NOT EXISTS messages (
         id SERIAL PRIMARY KEY,
         chat_id INTEGER REFERENCES chats(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
         content JSONB NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
     DO $$ 
