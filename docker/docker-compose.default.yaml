@@ -1,11 +1,11 @@
-name: ${APP_NAME}
+name: ${APP_NAME:-PWD##*/}
 
 services:
     app:
         build:
             context: ..
             dockerfile: docker/Dockerfile.prod
-        container_name: ${APP_NAME}-app
+        container_name: ${APP_NAME:-PWD##*/}-app
         env_file: ../.env
         environment:
             - POSTGRES_HOST=${POSTGRES_HOST:-localhost}
@@ -18,4 +18,4 @@ services:
 
 volumes:
     files:
-        name: ${APP_NAME}-files
+        name: ${APP_NAME:-PWD##*/}-files

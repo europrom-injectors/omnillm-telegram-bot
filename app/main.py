@@ -1,10 +1,10 @@
 import asyncio
 from aiogram import Bot, Dispatcher
 
-from config import TELEGRAM_BOT_TOKEN, sql
-from logger import setup_logging
-from router import router
-from middlewares import UserExistenceCheckMiddleware, ChatExistenceCheckMiddleware
+from core import setup_logging, TELEGRAM_BOT_TOKEN, DATABASE_CONFIG
+from middleware import setup_middleware
+from router import setup_router
+from database import PostgresPool
 
 setup_logging()
 
@@ -13,13 +13,13 @@ bot = Bot(token=TELEGRAM_BOT_TOKEN)
 dp = Dispatcher()
 
 # Setup dp
-dp.message.middleware(UserExistenceCheckMiddleware(sql))
-dp.message.middleware(ChatExistenceCheckMiddleware(sql))
-dp.include_router(router)
+setup_middleware(dp)
+setup_router(dp)
 
 
 async def main():
-    async with sql:
+    async with PostgresPool(DATABASE_CONFIG) as db_pool:
+        dp["db_pool"] = db_pool
         await dp.start_polling(bot, skip_updates=True)
 
 
