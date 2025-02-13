@@ -7,7 +7,7 @@ from typing import Any, Dict, Callable, Awaitable
 from database import PostgresDB, PostgresPool, Context
 
 
-class DatabaseMiddleware(BaseMiddleware):
+class UserExistsMiddleware(BaseMiddleware):
     async def __call__(
         self,
         handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
@@ -30,3 +30,22 @@ class DatabaseMiddleware(BaseMiddleware):
             result = await handler(event, data)
 
         return result
+
+
+class ActiveChatExistsMiddleware(BaseMiddleware):
+    async def __call__(
+        self,
+        handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
+        event: TelegramObject,
+        data: Dict[str, Any],
+    ) -> Any:
+        db: PostgresDB = data["db"]
+
+        with logfire.span("Checking if active chat exists..."):
+            if await db.get_active_chat() is None:
+                await db.create_active_chat()
+                logfire.info("Active chat created!")
+            else:
+                logfire.info("Active chat exists!")
+
+        return await handler(event, data)

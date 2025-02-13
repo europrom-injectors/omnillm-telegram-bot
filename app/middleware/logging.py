@@ -4,7 +4,7 @@ from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Message, CallbackQuery
 from typing import Any, Dict, Callable, Awaitable
 
-from database import Context
+from app.middleware.postgres import Context
 
 
 class LoggingMiddleware(BaseMiddleware):

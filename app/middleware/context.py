@@ -2,7 +2,7 @@ from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Update
 from typing import Any, Dict, Callable, Awaitable
 
-from database import Context
+from app.middleware.postgres import Context
 
 
 class ContextMiddleware(BaseMiddleware):
