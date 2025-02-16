@@ -11,5 +11,5 @@ router = Router()
 async def reply(message: Message, db: PostgresDB):
     deps = Dependencies(db=db)
     return message.reply(
-        await agent_endpoint(db, "google/gemini-2.0-flash-001", message.text, deps)
+        await agent_endpoint(db, "anthropic/claude-3-haiku:beta", message.text, deps)
     )
