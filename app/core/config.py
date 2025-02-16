@@ -5,6 +5,7 @@ import os
 
 APP_NAME = os.getenv("APP_NAME")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+OPENROUTER_TOKEN = os.getenv("OPENROUTER_TOKEN")
 LOGFIRE_TOKEN = os.getenv("LOGFIRE_TOKEN")
 DATABASE_CONFIG = {
     "host": os.getenv("POSTGRES_HOST"),

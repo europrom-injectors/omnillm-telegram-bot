@@ -1,15 +1,21 @@
 from aiogram import Dispatcher
 
 from .context import ContextMiddleware
-from .postgres import UserExistsMiddleware, ActiveChatExistsMiddleware
+from .postgres import DatabaseInstance, UserExistsMiddleware, ActiveChatExistsMiddleware
 from .logging import LoggingMiddleware
 
 
 def setup_middleware(dp: Dispatcher) -> None:
-    dp.message.outer_middleware(ContextMiddleware())
-    dp.message.outer_middleware(LoggingMiddleware())
-    dp.message.outer_middleware(UserExistsMiddleware())
-    dp.message.outer_middleware(ActiveChatExistsMiddleware())
+    middlewaries = [
+        ContextMiddleware,
+        LoggingMiddleware,
+        DatabaseInstance,
+        UserExistsMiddleware,
+        ActiveChatExistsMiddleware,
+    ]
+
+    for middleware in middlewaries:
+        dp.message.outer_middleware(middleware())
 
 
 __all__ = [
