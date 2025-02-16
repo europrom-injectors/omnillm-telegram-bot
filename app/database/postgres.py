@@ -92,7 +92,7 @@ class MessageMethods(PostgresConnectionWithContext):
         await self.execute(query, (self.context.user.id, content))
 
     async def get_all_messages(self, limit: int = 16) -> Optional[List[Message]]:
-        query = "SELECT * FROM messages WHERE chat_id = (SELECT active_chat_id FROM users WHERE id=$1) ORDER BY id DESC LIMIT $2"
+        query = "SELECT * FROM messages WHERE chat_id = (SELECT active_chat_id FROM users WHERE id=$1) ORDER BY id ASC LIMIT $2"
         result = await self.fetch_all(query, (self.context.user.id, limit), Message)
 
         return result
