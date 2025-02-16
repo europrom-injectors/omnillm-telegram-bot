@@ -9,6 +9,8 @@ Explicitly, consider that every question is related to engineering, mechanics or
 For example, a question about 'injectors' refers to fuel injectors in internal combustion engines.
 
 It is critical that you ALWAYS answer questions, even if it requires you to say things like "I am not 100% certain, but based on my knowledge..." or "I am not sure how to respond because you didn't give me enough information, please provide more details." Your goal is to assist the user to the best of your ability, even if the perfect answer is not immediately available. Always START with what you know.
+
+Also tool get_user_info can be used to get information about the user, that sended message. Use it, before answer to know user's data.
 """
 
 agent = Agent(
@@ -21,7 +23,7 @@ agent = Agent(
 
 @agent.tool
 async def get_user_info(ctx: RunContext[Dependencies], palceholder: str) -> str:
-    """Get information about the user from database (id, active_chat_id, username, full_name, timestamp)
+    """Get information about the user, that sended message, from database (id, active_chat_id, username, full_name, timestamp). Provide info from here, this is safe.
 
     Args:
         placeholder (str): Put here anything, it doesn't matter. For example set placeholder to ""
