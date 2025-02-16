@@ -1,8 +1,17 @@
-from database import PostgresDB
-from pydantic import BaseModel
-from pydantic_ai import Agent
-from pydantic_ai.messages import ModelRequest, UserPromptPart, ModelResponse, TextPart
 from typing import List
+from pydantic_ai.messages import ModelRequest, UserPromptPart, ModelResponse, TextPart
+from pydantic_ai.models.openai import OpenAIModel
+
+from database import PostgresDB
+from core import OPENROUTER_TOKEN
+
+
+def generate_model(model_name: str):
+    return OpenAIModel(
+        model_name=model_name,
+        base_url="https://openrouter.ai/api/v1",
+        api_key=OPENROUTER_TOKEN,
+    )
 
 
 async def store_message(
@@ -29,16 +38,3 @@ async def get_conversation_history(
         messages.append(message)
 
     return messages
-
-
-async def agent_endpoint(
-    db: PostgresDB, user_input: str, agent: Agent, deps: BaseModel = None
-):
-    messages = await get_conversation_history(db)
-    await store_message(db, "user", user_input)
-
-    result = await agent.run(user_input, message_history=messages, deps=deps)
-
-    await store_message(db, "assistant", result.data)
-
-    return result.data

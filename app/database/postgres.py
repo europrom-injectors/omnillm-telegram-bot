@@ -1,8 +1,10 @@
-from .context import PostgresConnectionWithContext
-from typing import Optional, List
-from core.decorators import async_logfire_class_decorator
+import json
 
+from typing import Optional, List
+
+from .context import PostgresConnectionWithContext
 from .models import User, Chat, Message
+from core import async_logfire_class_decorator
 
 
 @async_logfire_class_decorator
@@ -89,13 +91,17 @@ class ChatMethods(PostgresConnectionWithContext):
 class MessageMethods(PostgresConnectionWithContext):
     async def create_message(self, content: dict) -> None:
         query = "INSERT INTO messages (chat_id, content) VALUES ((SELECT active_chat_id FROM users WHERE id=$1), $2)"
-        await self.execute(query, (self.context.user.id, content))
+        await self.execute(query, (self.context.user.id, json.dumps(content)))
 
     async def get_all_messages(self, limit: int = 16) -> Optional[List[Message]]:
         query = "SELECT * FROM messages WHERE chat_id = (SELECT active_chat_id FROM users WHERE id=$1) ORDER BY id ASC LIMIT $2"
         result = await self.fetch_all(query, (self.context.user.id, limit), Message)
 
         return result
+
+    async def clear_messages(self) -> None:
+        query = "DELETE FROM messages WHERE chat_id = (SELECT active_chat_id FROM users WHERE id=$1)"
+        await self.execute(query, (self.context.user.id,))
 
 
 class PostgresDB(UserMethods, ChatMethods, MessageMethods):

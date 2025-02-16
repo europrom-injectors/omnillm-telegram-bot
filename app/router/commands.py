@@ -21,3 +21,9 @@ async def help(message: Message, db: PostgresDB):
 @router.message(Command("admin"), IsAdmin())
 async def admin(message: Message):
     return await message.reply("You are admin!")
+
+
+@router.message(Command("clear"))
+async def clear(message: Message, db: PostgresDB):
+    await db.clear_messages()
+    return await message.reply("Messages cleared!")

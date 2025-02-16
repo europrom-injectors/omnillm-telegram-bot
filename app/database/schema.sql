@@ -11,6 +11,7 @@ BEGIN;
     CREATE TABLE IF NOT EXISTS chats (
         id SERIAL PRIMARY KEY,
         user_id BIGINT,
+        llm_model VARCHAR(255) NOT NULL DEFAULT 'google/gemini-2.0-flash-001:nitro',
         name VARCHAR(255) NOT NULL,
         timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );

@@ -5,6 +5,7 @@ from typing import Dict, Any
 
 class User(BaseModel):
     id: int
+    active_chat_id: int
     username: str
     full_name: str
     timestamp: datetime
