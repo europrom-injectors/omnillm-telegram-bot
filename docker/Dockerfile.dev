@@ -8,6 +8,8 @@ RUN apt-get install -y git
 
 # Configuring git
 RUN git config --global core.autocrlf input
+RUN git config --global user.email "simeongfremenko@gmail.com"
+RUN git config --global user.name "lixelv"
 
 # Copy requirements first to leverage Docker cache
 COPY app/requirements.txt requirements.txt
