@@ -16,7 +16,7 @@ async def get_conversation_history(
 ) -> List[ModelRequest | ModelResponse]:
     messages = []
 
-    for message in await db.get_all_messages():
+    for message in await db.get_all_messages() or []:
         message_type = message.content["type"]
         message_content = message.content["content"]
 
