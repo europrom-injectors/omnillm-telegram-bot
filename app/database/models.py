@@ -1,5 +1,6 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Json
+from typing import Dict, Any
 
 
 class User(BaseModel):
@@ -19,5 +20,5 @@ class Chat(BaseModel):
 class Message(BaseModel):
     id: int
     chat_id: int
-    content: dict
+    content: Json[Dict[str, Any]]
     timestamp: datetime

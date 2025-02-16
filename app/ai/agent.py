@@ -6,9 +6,9 @@ from pydantic_ai.models.openai import OpenAIModel
 
 # Инициализация модели с использованием OpenRouter
 model = OpenAIModel(
-    model_name="openai/gpt-4o-2024-11-20",  # Убедитесь, что используете поддерживаемую модель
+    model_name="google/gemini-2.0-flash-001:nitro",  # Убедитесь, что используете поддерживаемую модель
     base_url="https://openrouter.ai/api/v1",
-    api_key=OPENROUTER_TOKEN,  # Замените на ваш действующий API-ключ
+    api_key=OPENROUTER_TOKEN,
 )
 agent = Agent(model=model)
 
