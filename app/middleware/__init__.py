@@ -16,6 +16,7 @@ def setup_middleware(dp: Dispatcher) -> None:
 
     for middleware in middlewaries:
         dp.message.outer_middleware(middleware())
+        dp.callback_query.outer_middleware(middleware())
 
 
 __all__ = [

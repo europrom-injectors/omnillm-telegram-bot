@@ -37,6 +37,7 @@ jsonpath-python==1.0.6
 logfire==3.5.3
 logfire-api==3.5.3
 magic-filter==1.0.12
+Markdown==3.7
 markdown-it-py==3.0.0
 mdurl==0.1.2
 mistralai==1.5.0

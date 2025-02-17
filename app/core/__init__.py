@@ -1,4 +1,10 @@
-from .config import APP_NAME, OPENROUTER_TOKEN, TELEGRAM_BOT_TOKEN, DATABASE_CONFIG
+from .config import (
+    APP_NAME,
+    OPENROUTER_TOKEN,
+    TELEGRAM_BOT_TOKEN,
+    DATABASE_CONFIG,
+    models,
+)
 from .logging import setup_logging
 from .decorators import (
     logfire_decorator,
@@ -13,6 +19,7 @@ __all__ = [
     "logfire_class_decorator",
     "async_logfire_decorator",
     "async_logfire_class_decorator",
+    "models",
     "APP_NAME",
     "TELEGRAM_BOT_TOKEN",
     "OPENROUTER_TOKEN",

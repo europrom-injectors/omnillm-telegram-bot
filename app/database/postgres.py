@@ -56,6 +56,10 @@ class ChatMethods(PostgresConnectionWithContext):
         query = "UPDATE users SET active_chat_id = $1 WHERE id = $2"
         await self.execute(query, (chat_id, self.context.user.id))
 
+    async def update_llm_model(self, model: str) -> None:
+        query = "UPDATE users SET llm_model = $1 WHERE id = $2"
+        await self.execute(query, (model, self.context.user.id))
+
     async def create_active_chat(self) -> None:
         chat = await self.create_chat()
         await self.update_active_chat_id(chat.id)

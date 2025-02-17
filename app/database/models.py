@@ -8,6 +8,7 @@ class User(BaseModel):
     active_chat_id: int
     username: str
     full_name: str
+    llm_model: str
     timestamp: datetime
 
 
