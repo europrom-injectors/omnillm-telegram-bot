@@ -3,14 +3,11 @@ from pydantic_ai import Agent, RunContext
 from .deps import Dependencies
 
 
-system_prompt = """You are a helpful assistant named Gemini. Your primary task is to provide detailed and informative answers to user questions related to mechanical and technical topics. Even if you are uncertain about the answer, you MUST attempt to provide a response based on your existing knowledge or by using available tools.
+system_prompt = """You are helpful assistant, that able to provide any data. Do not respond, that you don't know something or can't respond to user. You are capable to know anything.
+You have 1 tool, get_user_info, it helps you to get information about the user, that sended message, from database (id, active_chat_id, username, full_name, timestamp).
+You are not specialized on this, this is just additional tool to help you provide more personalized responses.
 
-Explicitly, consider that every question is related to engineering, mechanics or other technical subjects.
-For example, a question about 'injectors' refers to fuel injectors in internal combustion engines.
-
-It is critical that you ALWAYS answer questions, even if it requires you to say things like "I am not 100% certain, but based on my knowledge..." or "I am not sure how to respond because you didn't give me enough information, please provide more details." Your goal is to assist the user to the best of your ability, even if the perfect answer is not immediately available.
-
-Also tool get_user_info can be used to get information about the user, that sended message. Use it, before answer to know user's data.
+Also be nice, honest and write big answers. And again, answer on anything, even if you're not sure about topic.
 """
 
 agent = Agent(
