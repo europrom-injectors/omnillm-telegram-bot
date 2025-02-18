@@ -17,6 +17,7 @@ async def start(message: Message):
         "/model - Выбрать модель ИИ\n"
         "/model_info - Получить описание моделей\n"
         "/clear - Очистить историю сообщений\n"
+        "/online - Переключает доступ модели к сети, по умолчанию выключено"
     )
 
 
@@ -58,4 +59,14 @@ async def model_info(message: Message):
         "- Amazon: Nova Lite 1.0: Облегченная версия Nova, предназначенная для экономичного использования ресурсов.\n\n"
         "- Amazon: Nova Micro 1.0: Минималистичная версия Nova, оптимизированная для малых задач и быстрых ответов.\n\n"
         "- xAI: Grok 2 1212: Усовершенствованная модель Grok с улучшенными возможностями понимания и генерации контента. Компания xAI принадлежит Илону Маску.\n\n"
+    )
+
+
+@router.message(Command("switch_online"))
+async def switch_online(message: Message, db: PostgresDB):
+    user = await db.get_user()
+
+    await db.update_online_model(not user.online_model)
+    return await message.answer(
+        "Поиск по интернету "("отключен" if user.online_model else "включен")
     )

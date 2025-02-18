@@ -17,9 +17,20 @@ async def reply(message: Message, db: PostgresDB):
 
     deps = Dependencies(db=db)
 
-    result = await agent_endpoint(db, user.llm_model, message.text, deps)
-
-    await loading.delete()
+    try:
+        print(user.llm_model + (":online" if user.online_model else ""))
+        result = await agent_endpoint(
+            db,
+            user.llm_model + (":online" if user.online_model else ""),
+            message.text,
+            deps,
+        )
+        await loading.delete()
+    except Exception as e:
+        await loading.delete()
+        return await message.reply(
+            "Произошла ошибка. Свяжитесь с разработчиком: @lixelv"
+        )
 
     if len(result) <= 4096:
         return await message.reply(result)

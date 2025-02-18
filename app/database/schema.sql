@@ -6,6 +6,7 @@ BEGIN;
         username VARCHAR(255),
         full_name VARCHAR(255),
         llm_model VARCHAR(255) NOT NULL DEFAULT 'google/gemini-2.0-flash-001',
+        online_model BOOL NOT NULL DEFAULT false,
         timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 

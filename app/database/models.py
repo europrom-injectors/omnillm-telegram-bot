@@ -9,6 +9,7 @@ class User(BaseModel):
     username: Optional[str]
     full_name: Optional[str]
     llm_model: Optional[str]
+    online_model: bool
     timestamp: datetime
 
 

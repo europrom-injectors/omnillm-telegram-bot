@@ -32,6 +32,18 @@ class UserMethods(PostgresConnectionWithContext):
 
         return result
 
+    async def update_active_chat_id(self, chat_id: int) -> None:
+        query = "UPDATE users SET active_chat_id = $1 WHERE id = $2"
+        await self.execute(query, (chat_id, self.context.user.id))
+
+    async def update_llm_model(self, model: str) -> None:
+        query = "UPDATE users SET llm_model = $1 WHERE id = $2"
+        await self.execute(query, (model, self.context.user.id))
+
+    async def update_online_model(self, online_model: bool) -> None:
+        query = "UPDATE users SET online_model = $1 WHERE id = $2"
+        await self.execute(query, (online_model, self.context.user.id))
+
     async def delete_user(self) -> None:
         query = "DELETE FROM users WHERE id=$1"
         await self.execute(query, (self.context.user.id,))
@@ -51,18 +63,6 @@ class ChatMethods(PostgresConnectionWithContext):
         )
 
         return result
-
-    async def update_active_chat_id(self, chat_id: int) -> None:
-        query = "UPDATE users SET active_chat_id = $1 WHERE id = $2"
-        await self.execute(query, (chat_id, self.context.user.id))
-
-    async def update_llm_model(self, model: str) -> None:
-        query = "UPDATE users SET llm_model = $1 WHERE id = $2"
-        await self.execute(query, (model, self.context.user.id))
-
-    async def create_active_chat(self) -> None:
-        chat = await self.create_chat()
-        await self.update_active_chat_id(chat.id)
 
     async def get_chat(self, chat_id: int) -> Optional[Chat]:
         query = "SELECT * FROM chats WHERE id = $1"
@@ -109,4 +109,6 @@ class MessageMethods(PostgresConnectionWithContext):
 
 
 class PostgresDB(UserMethods, ChatMethods, MessageMethods):
-    pass
+    async def create_active_chat(self) -> None:
+        chat = await self.create_chat()
+        await self.update_active_chat_id(chat.id)
