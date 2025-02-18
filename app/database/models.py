@@ -1,14 +1,14 @@
 from datetime import datetime
 from pydantic import BaseModel, Json
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 
 class User(BaseModel):
     id: int
     active_chat_id: int
-    username: str
-    full_name: str
-    llm_model: str
+    username: Optional[str]
+    full_name: Optional[str]
+    llm_model: Optional[str]
     timestamp: datetime
 
 
