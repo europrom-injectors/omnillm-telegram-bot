@@ -62,11 +62,11 @@ async def model_info(message: Message):
     )
 
 
-@router.message(Command("switch_online"))
+@router.message(Command("online"))
 async def switch_online(message: Message, db: PostgresDB):
     user = await db.get_user()
 
     await db.update_online_model(not user.online_model)
     return await message.answer(
-        "Поиск по интернету "("отключен" if user.online_model else "включен")
+        "Поиск по интернету " + ("отключен" if user.online_model else "включен")
     )
