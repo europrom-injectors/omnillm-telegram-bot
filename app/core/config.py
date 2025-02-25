@@ -25,10 +25,11 @@ models = {
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat",
     "Google: Gemini Flash 2.0": "google/gemini-2.0-flash-001",
     "Google: Gemini Flash 1.5": "google/gemini-flash-1.5",
+"Anthropic: Claude 3.7 Sonnet": "anthropic/claude-3.7-sonnet",
     "Anthropic: Claude 3.5 Sonnet": "anthropic/claude-3.5-sonnet",
     "Anthropic: Claude 3.5 Haiku": "anthropic/claude-3.5-haiku",
+"Amazon: Nova Pro 1.0": "amazon/nova-pro-v1",
+   "Amazon: Nova Lite 1.0": "amazon/nova-lite-v1",
     "Amazon: Nova Micro 1.0": "amazon/nova-micro-v1",
-    "Amazon: Nova Lite 1.0": "amazon/nova-lite-v1",
-    "Amazon: Nova Pro 1.0": "amazon/nova-pro-v1",
     "xAI: Grok 2 1212": "x-ai/grok-2-1212",
 }
