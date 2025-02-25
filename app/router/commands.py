@@ -2,13 +2,11 @@ from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 
-from core import start_message, models_info_message
-from keyboard_ import create_keyboard
+from core import start_message, models_info_message, agents_info_message
+from keyboard_ import create_keyboard, create_agent_keyboard
 from database import PostgresDB
 
 router = Router()
-
-3
 
 
 @router.message(Command("start"))
@@ -24,14 +22,14 @@ async def clear(message: Message, db: PostgresDB):
 
 @router.message(Command("model"))
 async def model(message: Message, db: PostgresDB):
-    user = await db.get_user()
+    chat = await db.get_active_chat()
 
     model_descriptions = (
         "🤖 Выберите модель ИИ, получить их описание можно командой /model_info:\n\n"
     )
 
     return await message.reply(
-        model_descriptions, reply_markup=create_keyboard(user.llm_model)
+        model_descriptions, reply_markup=create_keyboard(chat.llm_model)
     )
 
 
@@ -42,9 +40,27 @@ async def model_info(message: Message):
 
 @router.message(Command("online"))
 async def switch_online(message: Message, db: PostgresDB):
-    user = await db.get_user()
+    chat = await db.get_active_chat()
 
-    await db.update_online_model(not user.online_model)
+    await db.update_chat_online_model(not chat.online_model)
     return await message.answer(
-        "Поиск по интернету " + ("отключен" if user.online_model else "включен")
+        "Поиск по интернету " + ("отключен" if chat.online_model else "включен")
     )
+
+
+@router.message(Command("agent"))
+async def agent(message: Message, db: PostgresDB):
+    chat = await db.get_active_chat()
+
+    agent_descriptions = (
+        "👥 Выберите стиль общения, получить описание можно командой /agent_info:\n\n"
+    )
+
+    return await message.reply(
+        agent_descriptions, reply_markup=create_agent_keyboard(chat.agent)
+    )
+
+
+@router.message(Command("agent_info"))
+async def agent_info(message: Message):
+    return await message.reply(agents_info_message)

@@ -5,8 +5,6 @@ BEGIN;
         active_chat_id INTEGER,
         username VARCHAR(255),
         full_name VARCHAR(255),
-        llm_model VARCHAR(255) NOT NULL DEFAULT 'google/gemini-2.0-flash-001',
-        online_model BOOL NOT NULL DEFAULT false,
         timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -14,6 +12,9 @@ BEGIN;
         id SERIAL PRIMARY KEY,
         user_id BIGINT,
         name VARCHAR(255) NOT NULL,
+        llm_model VARCHAR(255) NOT NULL DEFAULT '{DEFAULT_LLM_MODEL}',
+        agent VARCHAR(50) NOT NULL DEFAULT '{DEFAULT_AGENT}',
+        online_model BOOL NOT NULL DEFAULT false,
         timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 

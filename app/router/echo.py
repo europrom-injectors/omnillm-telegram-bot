@@ -9,7 +9,7 @@ router = Router()
 
 @router.message(F.content_type == ContentType.TEXT)
 async def reply(message: Message, db: PostgresDB):
-    user = await db.get_user()
+    chat = await db.get_active_chat()
 
     loading = await message.answer_sticker(
         "CAACAgIAAxkBAAPaZ3K_UpoKOS2DU0xBfRF0b6v2j-oAArQjAAKYSylI3rm-zSpb5Nk2BA",
@@ -18,11 +18,12 @@ async def reply(message: Message, db: PostgresDB):
     deps = Dependencies(db=db)
 
     try:
-        print(user.llm_model + (":online" if user.online_model else ""))
+        chat = await db.get_active_chat()
         result = await agent_endpoint(
             db,
-            user.llm_model + (":online" if user.online_model else ""),
+            chat.llm_model + (":online" if chat.online_model else ""),
             message.text,
+            chat.agent,
             deps,
         )
         await loading.delete()

@@ -8,8 +8,6 @@ class User(BaseModel):
     active_chat_id: int
     username: Optional[str]
     full_name: Optional[str]
-    llm_model: Optional[str]
-    online_model: bool
     timestamp: datetime
 
 
@@ -17,6 +15,9 @@ class Chat(BaseModel):
     id: int
     user_id: int
     name: str
+    agent: str
+    llm_model: Optional[str]
+    online_model: bool
     timestamp: datetime
 
 

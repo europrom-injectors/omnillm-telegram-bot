@@ -3,6 +3,8 @@ import asyncpg
 from pydantic import BaseModel
 from typing import Optional, List, TypeVar, Type
 
+from core import DEFAULT_LLM_MODEL, DEFAULT_AGENT
+
 T = TypeVar("T", bound=BaseModel)
 
 
@@ -25,7 +27,9 @@ class PostgresPool:
 
     async def create_tables(self) -> None:
         with open("app/database/schema.sql", "r") as f:
-            query = f.read()
+            query = f.read().format(
+                DEFAULT_LLM_MODEL=DEFAULT_LLM_MODEL, DEFAULT_AGENT=DEFAULT_AGENT
+            )
 
         async with self.pool.acquire() as connection:
             await self.execute(connection, query, transaction=True)

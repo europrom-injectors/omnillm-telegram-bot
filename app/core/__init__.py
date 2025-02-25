@@ -3,9 +3,13 @@ from .config import (
     OPENROUTER_TOKEN,
     TELEGRAM_BOT_TOKEN,
     DATABASE_CONFIG,
+    DEFAULT_LLM_MODEL,
+    DEFAULT_AGENT,
     models,
+    agents,
     start_message,
     models_info_message,
+    agents_info_message,
 )
 from .logging import setup_logging
 from .decorators import (
@@ -22,8 +26,12 @@ __all__ = [
     "async_logfire_decorator",
     "async_logfire_class_decorator",
     "models",
+    "agents",
     "start_message",
     "models_info_message",
+    "agents_info_message",
+    "DEFAULT_LLM_MODEL",
+    "DEFAULT_AGENT",
     "APP_NAME",
     "TELEGRAM_BOT_TOKEN",
     "OPENROUTER_TOKEN",
