@@ -2,7 +2,7 @@ from aiogram import Router
 from aiogram.types import CallbackQuery
 
 from keyboard_ import (
-    create_keyboard,
+    create_model_keyboard,
     create_agent_keyboard,
     SelectModelCallback,
     SelectAgentCallback,
@@ -21,7 +21,7 @@ async def change_model(callback: CallbackQuery, db: PostgresDB):
     await db.update_chat_llm_model(model.llm_model)
 
     return await callback.message.edit_reply_markup(
-        reply_markup=create_keyboard(model.llm_model)
+        reply_markup=create_model_keyboard(model.llm_model)
     )
 
 

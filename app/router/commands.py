@@ -3,7 +3,7 @@ from aiogram.filters import Command
 from aiogram.types import Message
 
 from core import start_message, models_info_message, agents_info_message
-from keyboard_ import create_keyboard, create_agent_keyboard
+from keyboard_ import create_model_keyboard, create_agent_keyboard
 from database import PostgresDB
 
 router = Router()
@@ -29,7 +29,7 @@ async def model(message: Message, db: PostgresDB):
     )
 
     return await message.reply(
-        model_descriptions, reply_markup=create_keyboard(chat.llm_model)
+        model_descriptions, reply_markup=create_model_keyboard(chat.llm_model)
     )
 
 
