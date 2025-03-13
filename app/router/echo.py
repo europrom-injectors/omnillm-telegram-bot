@@ -1,7 +1,8 @@
 from aiogram import Router, F
 from aiogram.types import Message, ContentType
 
-from aiogram.utils.text_decorations import markdown_decoration
+from telegramify_markdown import markdownify
+
 
 from ai import agent_endpoint, Dependencies
 from database import PostgresDB
@@ -36,15 +37,13 @@ async def reply(message: Message, db: PostgresDB):
         )
 
     if len(result) <= 4096:
-        return await message.reply(
-            markdown_decoration.quote(result), parse_mode="MarkdownV2"
-        )
+        return await message.reply(markdownify(result), parse_mode="MarkdownV2")
     else:
         last_message = message
 
         for sub_message in [result[i : i + 4096] for i in range(0, len(result), 4096)]:
             last_message = await last_message.reply(
-                markdown_decoration.quote(sub_message), parse_mode="MarkdownV2"
+                markdownify(sub_message), parse_mode="MarkdownV2"
             )
 
         return last_message
