@@ -30,7 +30,7 @@ async def reply(message: Message, db: PostgresDB):
             deps,
         )
         await loading.delete()
-    except Exception as e:
+    except Exception:
         await loading.delete()
         return await message.reply(
             "Произошла ошибка. Свяжитесь с разработчиком: @lixelv"
