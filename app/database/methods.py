@@ -105,7 +105,7 @@ class MessageMethods(PostgresConnectionWithContext):
         query = "INSERT INTO messages (chat_id, content) VALUES ((SELECT active_chat_id FROM users WHERE id=$1), $2)"
         await self.execute(query, (self.context.user.id, json.dumps(content)))
 
-    async def get_all_messages(self, limit: int = 16) -> Optional[List[Message]]:
+    async def get_all_messages(self, limit: int = 6) -> Optional[List[Message]]:
         query = "SELECT * FROM messages WHERE chat_id = (SELECT active_chat_id FROM users WHERE id=$1) ORDER BY id ASC LIMIT $2"
         result = await self.fetch_all(query, (self.context.user.id, limit), Message)
 
