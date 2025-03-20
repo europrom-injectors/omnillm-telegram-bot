@@ -22,12 +22,14 @@ async def reply(message: Message, db: PostgresDB):
 
     try:
         chat = await db.get_active_chat()
-        result = await agent_endpoint(
-            db,
-            chat.llm_model + (":online" if chat.online_model else ""),
-            message.text,
-            chat.agent,
-            deps,
+        result = markdownify(
+            await agent_endpoint(
+                db,
+                chat.llm_model + (":online" if chat.online_model else ""),
+                message.text,
+                chat.agent,
+                deps,
+            )
         )
         await loading.delete()
     except Exception:
@@ -37,13 +39,13 @@ async def reply(message: Message, db: PostgresDB):
         )
 
     if len(result) <= 4096:
-        return await message.reply(markdownify(result), parse_mode="MarkdownV2")
+        return await message.reply(result, parse_mode="MarkdownV2")
     else:
         last_message = message
 
         for sub_message in [result[i : i + 4096] for i in range(0, len(result), 4096)]:
             last_message = await last_message.reply(
-                markdownify(sub_message), parse_mode="MarkdownV2"
+                sub_message, parse_mode="MarkdownV2"
             )
 
         return last_message
