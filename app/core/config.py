@@ -4,7 +4,7 @@ import os
 # load_dotenv()
 
 APP_NAME = os.getenv("APP_NAME")
-DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL", "google/gemini-2.0-flash-001")
+DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL", "openai/gpt-4o-mini-search-preview")
 DEFAULT_AGENT = "default"
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 OPENROUTER_TOKEN = os.getenv("OPENROUTER_TOKEN")
@@ -20,8 +20,8 @@ DATABASE_CONFIG = {
 models = {
     "OpenAI: o3 Mini High": "openai/o3-mini-high",
     "OpenAI: o1": "openai/o1-mini",
-    "OpenAI: GPT-4o": "openai/gpt-4o",
-    "OpenAI: GPT-4o-mini": "openai/gpt-4o-mini",
+    "OpenAI: GPT-4o": "openai/gpt-4o-search-preview",
+    "OpenAI: GPT-4o-mini": "openai/gpt-4o-mini-search-preview",
     "DeepSeek: R1": "deepseek/deepseek-r1",
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat",
     "Google: Gemini Flash 2.0": "google/gemini-2.0-flash-001",
@@ -56,15 +56,15 @@ start_message = (
     "/agent - Выбрать агента (стиль общения)\n"
     "/agent_info - Получить описание агентов\n"
     "/clear - Очистить историю сообщений\n"
-    "/online - Переключает доступ модели к сети, по умолчанию выключено"
+    "/online - Переключает доступ модели к интернету, по умолчанию выключено (Лучше для поиска использовать gpt-4o и gpt-4o-mini у них поиск встроен в саму модель)"
 )
 
 models_info_message = (
     "Краткое описание каждой модели:\n\n"
     "- OpenAI: o3 Mini High: Самая продвинутая модель с технологией потока мысли от OpenAI.\n\n"
     "- OpenAI: o1: Более простая версия o3, все еще использует технологию потока мысли, но на удивление она дороже, чем o3.\n\n"
-    "- OpenAI: GPT-4o: Обычный ChatGPT, о котором вы так наслышены. Самая популярная модель от OpenAI.\n\n"
-    "- OpenAI: GPT-4o-mini: Мини-версия GPT-4o, предназначенная для более легких задач, также она дешевле и быстрее чем GPT-4o.\n\n"
+    "- OpenAI: GPT-4o: Обычный ChatGPT, о котором вы так наслышены. Самая популярная модель от OpenAI. Также она поддерживает поиск в интернете из коробки.\n\n"
+    "- OpenAI: GPT-4o-mini: Мини-версия GPT-4o, предназначенная для более легких задач, также она дешевле и быстрее чем GPT-4o.  Также она поддерживает поиск в интернете из коробки.\n\n"
     "- DeepSeek: R1: Первая модель от DeepSeek, использующая поток мысли, специальная технология позволяющая ИИ думать.\n\n"
     "- DeepSeek: DeepSeek V3: Обычная версия DeepSeek, без технологии потока мысли. Также она дешевле.\n\n"
     "- Google: Gemini Flash 2.0: Усовершенствованная версия языковой модели Gemini с улучшенной скоростью и эффективностью.\n\n"
