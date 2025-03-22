@@ -8,7 +8,7 @@ class User(BaseModel):
     active_chat_id: int
     username: Optional[str]
     full_name: Optional[str]
-    timestamp: Optionsl[datetime]
+    timestamp: Optional[datetime]
 
 
 class Chat(BaseModel):
