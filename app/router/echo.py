@@ -33,7 +33,7 @@ async def reply(message: Message, db: PostgresDB):
     except Exception:
         await loading.delete()
         return await message.reply(
-            "Произошла ошибка. Свяжитесь с разработчиком: @lixelv"
+            "Произошла ошибка. Попробуйте написать команду /clear, если не помогло свяжитесь с разработчиком: @lixelv"
         )
 
     if len(result) <= 4000:
