@@ -34,11 +34,11 @@ async def change_agent(callback: CallbackQuery, db: PostgresDB):
     callback_data = callback.data
     agent_data = SelectAgentCallback.unpack(callback_data)
 
-    await db.update_chat_agent(agent_data.agent)
+    await db.update_chat_agent(agent_data.agent.replace("DOUBLE_DOT", ":"))
 
     try:
         return await callback.message.edit_reply_markup(
-            reply_markup=create_agent_keyboard(agent_data.agent)
+            reply_markup=create_agent_keyboard(agent_data.agent.replace("DOUBLE_DOT", ":"))
         )
     except TelegramBadRequest as e:
         return None
