@@ -30,11 +30,12 @@ async def reply(message: Message, db: PostgresDB):
             deps,
         )
         await loading.delete()
-    except Exception:
+    except Exception as e:
         await loading.delete()
         return await message.reply(
             "Произошла ошибка. Попробуйте написать команду /clear, если не помогло свяжитесь с разработчиком: @lixelv"
         )
+        raise e
 
     if len(result) <= 4000:
         return await message.reply(markdownify(result), parse_mode="MarkdownV2")
