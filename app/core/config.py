@@ -4,7 +4,7 @@ import os
 # load_dotenv()
 
 APP_NAME = os.getenv("APP_NAME")
-DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL", "google/gemini-2.5-pro-exp-03-25:free")
+DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL", "openai/gpt-4o-mini-search-preview")
 DEFAULT_AGENT = "default"
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 OPENROUTER_TOKEN = os.getenv("OPENROUTER_TOKEN")
