@@ -19,11 +19,11 @@ async def change_model(callback: CallbackQuery, db: PostgresDB):
     callback_data = callback.data
     model = SelectModelCallback.unpack(callback_data)
 
-    await db.update_chat_llm_model(model.llm_model)
+    await db.update_chat_llm_model(model.llm_model.replace("DOUBLE_DOT", ":"))
 
     try:
         return await callback.message.edit_reply_markup(
-            reply_markup=create_model_keyboard(model.llm_model)
+            reply_markup=create_model_keyboard(model.llm_model.replace("DOUBLE_DOT", ":"))
         )
     except TelegramBadRequest as e:
         return None
@@ -34,11 +34,11 @@ async def change_agent(callback: CallbackQuery, db: PostgresDB):
     callback_data = callback.data
     agent_data = SelectAgentCallback.unpack(callback_data)
 
-    await db.update_chat_agent(agent_data.agent.replace("DOUBLE_DOT", ":"))
+    await db.update_chat_agent(agent_data.agent)
 
     try:
         return await callback.message.edit_reply_markup(
-            reply_markup=create_agent_keyboard(agent_data.agent.replace("DOUBLE_DOT", ":"))
+            reply_markup=create_agent_keyboard(agent_data.agent)
         )
     except TelegramBadRequest as e:
         return None
