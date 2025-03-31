@@ -4,7 +4,7 @@ import os
 # load_dotenv()
 
 APP_NAME = os.getenv("APP_NAME")
-DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL", "openai/gpt-4o-mini-search-preview")
+DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL", "google/gemini-2.5-pro-exp-03-25:free")
 DEFAULT_AGENT = "default"
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 OPENROUTER_TOKEN = os.getenv("OPENROUTER_TOKEN")
@@ -24,6 +24,7 @@ models = {
     "OpenAI: GPT-4o-mini": "openai/gpt-4o-mini-search-preview",
     "DeepSeek: R1": "deepseek/deepseek-r1",
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat",
+    "Google: Gemini Pro 2.5": "google/gemini-2.5-pro-exp-03-25:free",
     "Google: Gemini Flash 2.0": "google/gemini-2.0-flash-001",
     "Google: Gemini Flash 1.5": "google/gemini-flash-1.5",
     "Anthropic: Claude 3.7 Sonnet": "anthropic/claude-3.7-sonnet",
@@ -67,6 +68,7 @@ models_info_message = (
     "- OpenAI: GPT-4o-mini: Мини-версия GPT-4o, предназначенная для более легких задач, также она дешевле и быстрее чем GPT-4o.  Также она поддерживает поиск в интернете из коробки.\n\n"
     "- DeepSeek: R1: Первая модель от DeepSeek, использующая поток мысли, специальная технология позволяющая ИИ думать.\n\n"
     "- DeepSeek: DeepSeek V3: Обычная версия DeepSeek, без технологии потока мысли. Также она дешевле.\n\n"
+    "- Google: Gemini Pro 2.5: Самая продвинута, модель от google, вышла в конце марта, одна из самых последних моделей, бесплатна для пользования.\n\n"
     "- Google: Gemini Flash 2.0: Усовершенствованная версия языковой модели Gemini с улучшенной скоростью и эффективностью.\n\n"
     "- Google: Gemini Flash 1.5: Предшественник Gemini Flash 2.0, ориентированный на более быстрые ответы (в 2 раза быстрее, не глупее, чем Gemini Flash 2.0).\n\n"
     "- Anthropic: Claude 3.7 Sonnet: Модель серии Claude, оптимизированная для глубокого понимания и генерации текста. Очень умная модель, лучшая среди Claude.\n\n"
