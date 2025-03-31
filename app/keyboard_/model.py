@@ -11,7 +11,7 @@ def create_model_keyboard(active_llm_model: str = "google/gemini-2.0-flash-001:o
     builder = InlineKeyboardBuilder()
 
     for model_name, model_value in models.items():
-        if model_value == active_llm_model:
+        if model_value.replace("DOUBLE_DOT", ":") == active_llm_model:
             builder.button(
                 text="✅ " + model_name,
                 callback_data=SelectModelCallback(llm_model=model_value).pack(),
