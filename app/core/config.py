@@ -24,15 +24,18 @@ models = {
     "OpenAI: GPT-4o-mini": "openai/gpt-4o-mini-search-preview",
     "DeepSeek: R1": "deepseek/deepseek-r1",
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat",
-    "Google: Gemini Pro 2.5": "google/gemini-2.5-pro-exp-03-25DOUBLE_DOTfree",
+    "Google: Gemini Pro 2.5": "google/gemini-2.5-pro-preview-03-25",
     "Google: Gemini Flash 2.0": "google/gemini-2.0-flash-001",
     "Google: Gemini Flash 1.5": "google/gemini-flash-1.5",
     "Anthropic: Claude 3.7 Sonnet": "anthropic/claude-3.7-sonnet",
     "Anthropic: Claude 3.5 Sonnet": "anthropic/claude-3.5-sonnet",
     "Anthropic: Claude 3.5 Haiku": "anthropic/claude-3.5-haiku",
+    "Meta: Llama 4 Maverick": "meta-llama/llama-4-maverick",
+    "Meta: Llama 4 Scout": "meta-llama/llama-4-scout",
     "Amazon: Nova Pro 1.0": "amazon/nova-pro-v1",
     "Amazon: Nova Lite 1.0": "amazon/nova-lite-v1",
     "xAI: Grok 2 1212": "x-ai/grok-2-1212",
+    "Quasar Alpha": "openrouter/quasar-alpha",
 }
 
 agents = {
@@ -76,5 +79,8 @@ models_info_message = (
     "- Anthropic: Claude 3.5 Haiku: Как Anthropic: Claude 3.5 Sonnet только быстрее и дешевле, но глупее.\n\n"
     "- Amazon: Nova Pro 1.0: Профессиональная версия Nova с расширенными возможностями и высокой производительностью.\n\n"
     "- Amazon: Nova Lite 1.0: Облегченная версия Nova, предназначенная для экономичного использования ресурсов.\n\n"
+    "- Meta: Llama 4 Maverick: Самая новая модель от Facebook, с улучшенными возможностями понимания и генерации контента.\n\n"
+    "- Meta: Llama 4 Scout: Младшая версия Meta: Llama 4 Maverick.\n\n"
     "- xAI: Grok 2 1212: Усовершенствованная модель Grok с улучшенными возможностями понимания и генерации контента. Компания xAI принадлежит Илону Маску.\n\n"
+    "- Quasar Alpha: Модель от OpenRouter, она полностью бесплатна в использовании, быстра и умна, очень советую к использованию.\n\n"
 )
