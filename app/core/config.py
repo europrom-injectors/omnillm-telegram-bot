@@ -36,7 +36,6 @@ models = {
     "Amazon: Nova Pro 1.0": "amazon/nova-pro-v1",
     "Amazon: Nova Lite 1.0": "amazon/nova-lite-v1",
     "xAI: Grok 2 1212": "x-ai/grok-2-1212",
-    "Quasar Alpha": "openrouter/quasar-alpha",
 }
 
 agents = {
@@ -84,5 +83,4 @@ models_info_message = (
     "- Meta: Llama 4 Maverick: Самая новая модель от Facebook, с улучшенными возможностями понимания и генерации контента.\n\n"
     "- Meta: Llama 4 Scout: Младшая версия Meta: Llama 4 Maverick.\n\n"
     "- xAI: Grok 2 1212: Усовершенствованная модель Grok с улучшенными возможностями понимания и генерации контента. Компания xAI принадлежит Илону Маску.\n\n"
-    "- Quasar Alpha: Модель от OpenRouter, она полностью бесплатна в использовании, быстра и умна, очень советую к использованию.\n\n"
 )
