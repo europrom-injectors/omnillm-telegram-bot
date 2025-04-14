@@ -22,6 +22,7 @@ models = {
     "OpenAI: o1": "openai/o1-mini",
     "OpenAI: GPT-4o": "openai/gpt-4o-search-preview",
     "OpenAI: GPT-4o-mini": "openai/gpt-4o-mini-search-preview",
+    "OpenAI: GPT-4.1": "openai/gpt-4.1",
     "DeepSeek: R1": "deepseek/deepseek-r1",
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat",
     "Google: Gemini Pro 2.5": "google/gemini-2.5-pro-preview-03-25",
@@ -35,7 +36,6 @@ models = {
     "Amazon: Nova Pro 1.0": "amazon/nova-pro-v1",
     "Amazon: Nova Lite 1.0": "amazon/nova-lite-v1",
     "xAI: Grok 2 1212": "x-ai/grok-2-1212",
-    "Quasar Alpha": "openrouter/quasar-alpha",
 }
 
 agents = {
@@ -69,6 +69,7 @@ models_info_message = (
     "- OpenAI: o1: Более простая версия o3, все еще использует технологию потока мысли, но на удивление она дороже, чем o3.\n\n"
     "- OpenAI: GPT-4o: Обычный ChatGPT, о котором вы так наслышены. Самая популярная модель от OpenAI. Также она поддерживает поиск в интернете из коробки.\n\n"
     "- OpenAI: GPT-4o-mini: Мини-версия GPT-4o, предназначенная для более легких задач, также она дешевле и быстрее чем GPT-4o.  Также она поддерживает поиск в интернете из коробки.\n\n"
+    "- OpenAI: GPT-4.1: Последняя модель от OpenAI.\n\n"
     "- DeepSeek: R1: Первая модель от DeepSeek, использующая поток мысли, специальная технология позволяющая ИИ думать.\n\n"
     "- DeepSeek: DeepSeek V3: Обычная версия DeepSeek, без технологии потока мысли. Также она дешевле.\n\n"
     "- Google: Gemini Pro 2.5: Самая продвинута, модель от google, вышла в конце марта, одна из самых последних моделей, бесплатна для пользования.\n\n"
@@ -82,5 +83,4 @@ models_info_message = (
     "- Meta: Llama 4 Maverick: Самая новая модель от Facebook, с улучшенными возможностями понимания и генерации контента.\n\n"
     "- Meta: Llama 4 Scout: Младшая версия Meta: Llama 4 Maverick.\n\n"
     "- xAI: Grok 2 1212: Усовершенствованная модель Grok с улучшенными возможностями понимания и генерации контента. Компания xAI принадлежит Илону Маску.\n\n"
-    "- Quasar Alpha: Модель от OpenRouter, она полностью бесплатна в использовании, быстра и умна, очень советую к использованию.\n\n"
 )
