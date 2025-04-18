@@ -32,8 +32,8 @@ async def reply(message: Message, db: PostgresDB):
         await loading.delete()
     except Exception as e:
         await loading.delete()
-        return await message.reply(
-            "Произошла ошибка. Попробуйте написать команду /clear, если не помогло свяжитесь с разработчиком: @lixelv"
+        await message.reply(
+            "Произошла ошибка. Попробуйте написать команду /clear, если не помогло смените модель с помощью команды /model. Если и это не помогло, свяжитесь с разработчиком: @lixelv"
         )
         raise e
 
