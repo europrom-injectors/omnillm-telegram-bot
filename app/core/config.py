@@ -24,7 +24,7 @@ models = {
     "OpenAI: GPT-4.1": "openai/gpt-4.1",
     "DeepSeek: R1": "deepseek/deepseek-r1",
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat-v3-0324",
-    "Google: Gemini 2.5 Pro": "google/gemini-2.5-pro-preview-03-25",
+    "Google: Gemini 2.5 Pro": "google/gemini-2.5-pro-preview",
     "Google: Gemini 2.5 Flash": "google/gemini-2.5-flash-preview",
     "Google: Gemini 2.0 Flash": "google/gemini-2.0-flash-001",
     "Anthropic: Claude 3.7 Sonnet": "anthropic/claude-3.7-sonnet",
