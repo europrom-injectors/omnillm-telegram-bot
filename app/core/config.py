@@ -25,15 +25,15 @@ models = {
     "xAI: Grok 4": "x-ai/grok-4",
     "DeepSeek: R1": "deepseek/deepseek-r1",
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat-v3-0324",
-    "Google: Gemini 2.5 Pro": "google/gemini-2.5-pro-preview",
-    "Google: Gemini 2.5 Flash": "google/gemini-2.5-flash-preview",
-    "Google: Gemini 2.0 Flash": "google/gemini-2.0-flash-001",
+    "Google: Gemini 2.5 Pro": "google/gemini-2.5-pro",
+    "Google: Gemini 2.5 Flash": "google/gemini-2.5-flash",
+    "Google: Gemini 2.5 Flash Lite": "google/gemini-2.5-flash-lite-preview-06-17",
     "Anthropic: Claude 3.7 Sonnet": "anthropic/claude-3.7-sonnet",
     "Anthropic: Claude 3.5 Sonnet": "anthropic/claude-3.5-sonnet",
     "Anthropic: Claude 3.5 Haiku": "anthropic/claude-3.5-haiku",
     "Meta: Llama 4 Maverick": "meta-llama/llama-4-maverick",
     "Meta: Llama 4 Scout": "meta-llama/llama-4-scout",
-    "Mistral: Mistral Large 2411": "mistralai/mistral-large-2411",
+    "Qwen: Qwen3 235B A22B": "qwen/qwen3-235b-a22b",
     "Amazon: Nova Pro 1.0": "amazon/nova-pro-v1",
     "Amazon: Nova Lite 1.0": "amazon/nova-lite-v1",
 }
@@ -74,13 +74,13 @@ models_info_message = (
     "- DeepSeek: DeepSeek V3: Обычная версия DeepSeek, без технологии потока мысли. Также она дешевле.\n\n"
     "- Google: Gemini 2.5 Pro: Самая продвинута, модель от google, вышла в середине апреля, одна из самых последних моделей.\n\n"
     "- Google: Gemini 2.5 Flash : Усовершенствованная версия языковой модели Gemini с улучшенной скоростью и эффективностью.\n\n"
-    "- Google: Gemini 2.0 Flash: Предшественник Gemini Flash 2.5, ориентированный на более быстрые ответы (в 2 раза быстрее, не глупее, чем Gemini Flash 2.5).\n\n"
+    "- Google: Gemini 2.5 Flash Lite: То же, что и Gemini 2.5 Flash, но дешевле.\n\n"
     "- Anthropic: Claude 3.7 Sonnet: Модель серии Claude, оптимизированная для глубокого понимания и генерации текста. Очень умная модель, лучшая среди Claude.\n\n"
     "- Anthropic: Claude 3.5 Sonnet: Предшественник Anthropic: Claude 3.7 Sonnet.\n\n"
     "- Anthropic: Claude 3.5 Haiku: Как Anthropic: Claude 3.5 Sonnet только быстрее и дешевле, но глупее.\n\n"
     "- Meta: Llama 4 Maverick: Самая новая модель от Facebook, с улучшенными возможностями понимания и генерации контента.\n\n"
     "- Meta: Llama 4 Scout: Младшая версия Meta: Llama 4 Maverick.\n\n"
-    "- Mistral: Mistral Large 2411: Самая большая модель от Mistral, с улучшенными возможностями понимания и генерации контента. Mistal - европейская компания.\n\n"
+    "- Qwen: Qwen3 235B A22B: Какая-то модель от китайцев, попробуйте, может понравится.\n\n"
     "- Amazon: Nova Lite 1.0: Облегченная версия Nova, предназначенная для экономичного использования ресурсов.\n\n"
     "- Amazon: Nova Pro 1.0: Профессиональная версия Nova с расширенными возможностями и высокой производительностью.\n\n\n"
     
