@@ -22,6 +22,7 @@ models = {
     "OpenAI: GPT-4o": "openai/gpt-4o-search-preview",
     "OpenAI: GPT-4o-mini": "openai/gpt-4o-mini-search-preview",
     "OpenAI: GPT-4.1": "openai/gpt-4.1",
+    "xAI: Grok 4": "x-ai/grok-4",
     "DeepSeek: R1": "deepseek/deepseek-r1",
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat-v3-0324",
     "Google: Gemini 2.5 Pro": "google/gemini-2.5-pro-preview-03-25",
@@ -35,7 +36,6 @@ models = {
     "Mistral: Mistral Large 2411": "mistralai/mistral-large-2411",
     "Amazon: Nova Pro 1.0": "amazon/nova-pro-v1",
     "Amazon: Nova Lite 1.0": "amazon/nova-lite-v1",
-    "xAI: Grok 3 Mini Beta": "x-ai/grok-3-mini-beta",
 }
 
 agents = {
@@ -69,6 +69,7 @@ models_info_message = (
     "- OpenAI: GPT-4o: Обычный ChatGPT, о котором вы так наслышены. Самая популярная модель от OpenAI. Также она поддерживает поиск в интернете из коробки (Лучшая модель для поиска в интернете).\n\n"
     "- OpenAI: GPT-4o-mini: Мини-версия GPT-4o, предназначенная для более легких задач, также она дешевле и быстрее чем GPT-4o. Она также умеет искать информацию в интернете, как GPT-4o.\n\n"
     "- OpenAI: GPT-4.1: Последняя модель GPT от OpenAI, вышла в середине апреля.\n\n"
+    "- xAI: Grok 4: Самая продвинтуая модель на лето 2025 года, вышла совсем недавно и разительно отличается от остальных моделей своим качеством ответов. Также компания xAI принадлежит Илону Маску.\n\n"
     "- DeepSeek: R1: Первая модель от DeepSeek, использующая поток мысли, специальная технология позволяющая ИИ думать.\n\n"
     "- DeepSeek: DeepSeek V3: Обычная версия DeepSeek, без технологии потока мысли. Также она дешевле.\n\n"
     "- Google: Gemini 2.5 Pro: Самая продвинута, модель от google, вышла в середине апреля, одна из самых последних моделей.\n\n"
@@ -81,13 +82,12 @@ models_info_message = (
     "- Meta: Llama 4 Scout: Младшая версия Meta: Llama 4 Maverick.\n\n"
     "- Mistral: Mistral Large 2411: Самая большая модель от Mistral, с улучшенными возможностями понимания и генерации контента. Mistal - европейская компания.\n\n"
     "- Amazon: Nova Lite 1.0: Облегченная версия Nova, предназначенная для экономичного использования ресурсов.\n\n"
-    "- Amazon: Nova Pro 1.0: Профессиональная версия Nova с расширенными возможностями и высокой производительностью.\n\n"
-    "- xAI: Grok 3 Mini Beta: Усовершенствованная модель Grok с улучшенными возможностями понимания и генерации контента. Компания xAI принадлежит Илону Маску.\n\n\n"
+    "- Amazon: Nova Pro 1.0: Профессиональная версия Nova с расширенными возможностями и высокой производительностью.\n\n\n"
     
     "И немного рекомендаций:\n\n"
     "Для поиска в интернете используйте GPT-4o и GPT-4o-mini.\n"
     "Для программирования используйте Claude 3.7 Sonnet | GPT-4.1 | Gemini 2.5 Pro.\n"
-    "Для сложных задач, требующих анализа, используйте o4 Mini High.\n"
+    "Для сложных задач, требующих анализа, используйте o4 Mini High | Grok 4.\n"
     "Для остальных целей отлично подойдет GPT-4.1 и Gemini 2.5 Pro.\n"
     "Остальные модели можете пробовать по желанию."
 )
