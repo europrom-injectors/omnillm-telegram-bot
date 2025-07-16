@@ -23,7 +23,7 @@ models = {
     "OpenAI: GPT-4o-mini": "openai/gpt-4o-mini-search-preview",
     "OpenAI: GPT-4.1": "openai/gpt-4.1",
     "xAI: Grok 4": "x-ai/grok-4",
-    "MoonshotAI: Kimi K2": "moonshotai/kimi-k2:groq",
+    "MoonshotAI: Kimi K2": "moonshotai/kimi-k2",
     "DeepSeek: R1": "deepseek/deepseek-r1",
     "DeepSeek: DeepSeek V3": "deepseek/deepseek-chat-v3-0324",
     "Google: Gemini 2.5 Pro": "google/gemini-2.5-pro",
