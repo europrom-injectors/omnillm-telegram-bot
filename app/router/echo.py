@@ -8,7 +8,7 @@ from ai import agent_endpoint, Dependencies
 from database import PostgresDB
 
 router = Router()
-
+limit = 3900
 
 @router.message(F.content_type == ContentType.TEXT)
 async def reply(message: Message, db: PostgresDB):
@@ -37,12 +37,12 @@ async def reply(message: Message, db: PostgresDB):
         )
         raise e
 
-    if len(result) <= 4000:
+    if len(result) <= limit:
         return await message.reply(markdownify(result), parse_mode="MarkdownV2")
     else:
         last_message = message
 
-        for sub_message in [result[i : i + 4000] for i in range(0, len(result), 4000)]:
+        for sub_message in [result[i : i + limit] for i in range(0, len(result), limit)]:
             last_message = await last_message.reply(
                 markdownify(sub_message), parse_mode="MarkdownV2"
             )
