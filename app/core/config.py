@@ -4,7 +4,7 @@ import os
 # load_dotenv()
 
 APP_NAME = os.getenv("APP_NAME")
-DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL", "x-ai/grok-4-fast")
+DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL", "openrouter/auto")
 DEFAULT_AGENT = "default"
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 OPENROUTER_TOKEN = os.getenv("OPENROUTER_TOKEN")
@@ -18,6 +18,7 @@ DATABASE_CONFIG = {
 }
 
 models = {
+    "Auto Router": "openrouter/auto",
     "OpenAI: o4 Mini High": "openai/o4-mini-high",
     "OpenAI: GPT-4o": "openai/gpt-4o-search-preview",
     "OpenAI: GPT-5": "openai/gpt-5",
